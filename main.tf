@@ -10,6 +10,7 @@ terraform {
 provider "scaleway" {
   zone            = "fr-par-1"
   region          = "fr-par"
+  project_id      = "bfb14d1d-3b06-40df-8467-f2569e3f3db7"
 }
 
 data "scaleway_instance_image" "locust" {

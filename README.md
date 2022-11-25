@@ -1,5 +1,20 @@
 # Locust
 
+### Install
+
+```bash
+terraform init
+export SCW_ACCESS_KEY="XXXXXXXXXXXXXXXXXXXX"
+export SCW_SECRET_KEY="xxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx"
+```
+
+### Launch
+
+```bash
+terraform apply -var="tasks_url=https://gist.githubusercontent.com/guillaumepotier/1cde30986851e7a915e0ddce57c997f5/raw/4fda21ad5d4d7b1d054b58bd8f7900d3de71d0ed/tasks.py" -var="locust_username=guillaume" -var="locust_password=wisembly" -var="workers_nb=3"
+```
+
+
 ## Requirements
 
 | Name | Version |
