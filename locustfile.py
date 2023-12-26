@@ -1,5 +1,6 @@
 import time
 import json
+import hashlib
 
 from locust import HttpUser, task, between
 
@@ -10,7 +11,12 @@ from locust import HttpUser, task, between
 KEYWORD = "tmc"
 
 class QuickstartUser(HttpUser):
-    wait_time = between(0.1, 1.1)
+    wait_time = between(1, 5)
+
+    def shaHash(self, string):
+        m = hashlib.sha1()
+        m.update(string.encode('utf-8'))
+        return str(m.hexdigest())
 
     @task
     def on_start(self):
@@ -39,11 +45,41 @@ class QuickstartUser(HttpUser):
             else:
                 response.failure("Could not get credentials")
 
-    @task
+    @task(100)
     def get_event(self):
         self.client.get("/api/6/event/%s" % KEYWORD)
         self.client.post("/api/6/event/%s/watchers" % KEYWORD)
         self.client.get("/api/6/event/%s/medias?limit=25&offset=0&active=true" % KEYWORD)
         self.client.get("/api/6/event/%s/surveys?limit=50" % KEYWORD)
         self.client.get("/api/6/event/%s/quotes?sort=recent&limit=10&unmoderated=false" % KEYWORD)
+
+    @task(5)
+    def post_quote(self):
+        hash = self.shaHash(str(time.time()))
+        payload = {"data":{"id": hash,"type":"quote","attributes":{"quote":"Hello %s" % hash,"username":"Guillaume Potier","via":"tablet"},"relationships":{}}}
+        clientParams = {
+            "catch_response": True,
+            "verify": False,
+            "data": json.dumps(payload),
+        }
+
+        with self.client.post("/api/6/event/%s/quotes" % KEYWORD, **clientParams) as response:
+            if response.status_code == 201:
+                response.success()
+            else:
+                response.failure("Could not post quote")
+
+    @task(20)
+    def post_mood(self):
+        clientParams = {
+            "catch_response": True,
+            "verify": False,
+        }
+
+        with self.client.get("/api/4/event/%s/mood?mood=tada" % KEYWORD, **clientParams) as response:
+            if response.status_code == 201:
+                response.success()
+            else:
+                response.failure("Could not post quote")
+
 
