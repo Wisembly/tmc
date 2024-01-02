@@ -49,6 +49,14 @@ class QuickstartUser(HttpUser):
     def get_event(self):
         self.client.get("/api/6/event/%s" % KEYWORD)
         self.client.post("/api/6/event/%s/watchers" % KEYWORD)
+
+        clientParams = {
+            "data": json.dumps({"event": {"keyword": KEYWORD}}),
+            "headers": {'content-type': 'application/json'}
+        }
+
+        self.client.post("/api/4/users/node/credentials", **clientParams)
+
         self.client.get("/api/6/event/%s/medias?limit=25&offset=0&active=true" % KEYWORD)
         self.client.get("/api/6/event/%s/surveys?limit=50" % KEYWORD)
         self.client.get("/api/6/event/%s/quotes?sort=recent&limit=10&unmoderated=false" % KEYWORD)
