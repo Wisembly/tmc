@@ -1,11 +1,11 @@
 #!/usr/bin/env bash
 set -x
-apt update
-apt upgrade -y
-groupadd -f locust
-useradd -m locust -g locust || echo "user already exists"
-apt install -y htop emacs-nox wget iftop iotop python3-pip
-pip install locust
+# apt update
+# apt upgrade -y
+# groupadd -f locust
+# useradd -m locust -g locust || echo "user already exists"
+# apt install -y htop emacs-nox wget iftop iotop python3-pip
+# pip install locust
 echo '* - nofile 1000000' >> /etc/security/limits.conf
 echo '* - nproc 1000000' >> /etc/security/limits.conf
 

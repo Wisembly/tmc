@@ -11,7 +11,7 @@ export SCW_SECRET_KEY="xxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx"
 ### Launch
 
 ```bash
-terraform apply -var="tasks_url=https://gist.githubusercontent.com/guillaumepotier/1cde30986851e7a915e0ddce57c997f5/raw/4fda21ad5d4d7b1d054b58bd8f7900d3de71d0ed/tasks.py" -var="locust_username=guillaume" -var="locust_password=wisembly" -var="workers_nb=3"
+terraform apply -var="tasks_url=https://gist.githubusercontent.com/guillaumepotier/fee14623614f64035cd53da92298e10d/raw/b49c688a13879a57535b6bfaebf5461eb7999f0e/loading_quotes_moods.py" -var="locust_username=guillaume" -var="locust_password=wisembly" -var="workers_nb=9"
 ```
 
 

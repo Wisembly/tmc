@@ -12,7 +12,7 @@ from locust.contrib.fasthttp import FastHttpUser
 KEYWORD = "tmc"
 SURVEY_HASH = "2d2e36786c5f1dee206620413313dd8031d0ef8f"
 SURVEY_ITEM_HASH = "5f3e2a52627e5902ed5987177ff546d47e645066"
-TOKEN="660383a9cd886a70c0bed7a37cc1e4a66cd8a48a"
+TOKEN="d416ef2d47c98b6804b5637ce3f386837196f3e5"
 
 class QuickstartUser(FastHttpUser):
     wait_time = constant(10000)

@@ -14,7 +14,7 @@ provider "scaleway" {
 }
 
 data "scaleway_instance_image" "locust" {
-  image_id = "ff48b73a-097d-4685-b996-d3ebe50636ea"
+  image_id = "eb32085c-a9fa-4477-b717-11553fc79e99"
 }
 
 module "master" {
