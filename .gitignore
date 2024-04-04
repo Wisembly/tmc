@@ -30,3 +30,5 @@ override.tf.json
 
 *.dist
 /__pycache__/*
+
+.env
